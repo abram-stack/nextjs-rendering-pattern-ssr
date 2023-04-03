@@ -4,6 +4,9 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import { co2 } from '@tgwf/co2'
+import Header from '../components/Header'
+import Card from '../components/Card'
+
 
 export async function getServerSideProps() {
   //create request
@@ -27,26 +30,39 @@ export default function Home({ pokemon }) {
       <Head>
         <title>Entwurfsmuster</title>
       </Head>
-      <h2>Pokemon lists</h2>
-      <div className={styles.grid}>
-        {pokemon.map(pokemon => (
-          <div className={styles.card} key={pokemon.id}>
-            <Link href={`/pokemon/${pokemon.id}`}>
-              <Image
-                src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
-                alt={pokemon.name}
-                width={200}
-                height={200}
-              />
-                {/* <img
-                  src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
-                  alt={pokemon.name}
-                /> */}
-                <h3>{pokemon.name}</h3>
-            </Link>
+
+      <Header />
+      
+      <div className={styles.content}>
+        <div className={styles.grid}>
+          {pokemon.map(pokemon => (
+            <Card pokemon={pokemon} key={pokemon.id} />
+            
+          ))}
           </div>
-        ))}
-        </div>
+      </div>
+      
     </div>
   )
 }
+
+{/* <div className={styles.grid}>
+        
+</div> */}
+// {pokemon.map(pokemon => (
+//           <div className={styles.card} key={pokemon.id}>
+//             <Link href={`/pokemon/${pokemon.id}`}>
+//               <Image
+//                 src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
+//                 alt={pokemon.name}
+//                 width={200}
+//                 height={200}
+//               />
+//                 {/* <img
+//                   src={`https://jherr-pokemon.s3.us-west-1.amazonaws.com/${pokemon.image}`}
+//                   alt={pokemon.name}
+//                 /> */}
+//                 <h3>{pokemon.name}</h3>
+//             </Link>
+//           </div>
+//         ))}
